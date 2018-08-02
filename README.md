@@ -1,1 +1,2 @@
-# packer-centos7
+# centos7
+packer scripts to create docker images for centos7

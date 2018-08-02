@@ -1,0 +1,25 @@
+{
+  "variables": {
+    "version": "0.0.1"
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "centos:centos7",
+      "commit": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible-local",
+    "playbook_file": "playbook.yml"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-tag",
+      "repository": "fenk/centos7-jdk8",
+      "tag": "{{user `version`}}"
+    }
+  ]
+}
