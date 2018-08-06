@@ -1,0 +1,37 @@
+{
+  "variables": {
+    "version": "0.0.1"
+  },
+  "builders":[
+    {
+      "type": "docker",
+      "image": "centos:centos7",
+      "commit": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "echo 'Install packages'",
+        "yum install -y epel-release",
+        "yum install -y ansible"
+        
+        
+      ]
+  },
+   {
+    "type": "ansible-local",
+    "playbook_file": "playbook.yml"
+   }
+],
+"post-processors": [
+  [
+    {
+      "type": "docker-tag",
+      "repository": "packer/centos7-apache",
+      "tag": "{{user `version`}}"
+    }
+  ]
+]
+}
